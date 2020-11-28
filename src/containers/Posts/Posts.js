@@ -7,7 +7,7 @@ import './Posts.css';
 class Posts extends Component {
   state = {
     posts: [],
-    selectedPostId: null,
+    // selectedPostId: null,
     error: false,
   };
 
@@ -23,16 +23,15 @@ class Posts extends Component {
           };
         });
         this.setState({ posts: updatedPosts });
-        // console.log( response );
       })
       .catch((error) => {
-        // console.log(error);
         this.setState({ error: true });
       });
   }
 
   postSelectedHandler = (id) => {
-    this.setState({ selectedPostId: id });
+    // this.setState({ selectedPostId: id });
+    this.props.history.push('/' + id);
   };
 
   render() {
@@ -41,13 +40,14 @@ class Posts extends Component {
       posts = this.state.posts.map((post) => {
         return (
           <section className="Posts">
-            <Link to={'/' + post.id} key={post.id}>
-              <Post
-                title={post.title}
-                author={post.author}
-                clicked={() => this.postSelectedHandler(post.id)}
-              />
-            </Link>
+            {/* <Link to={'/' + post.id} key={post.id}> */}
+            <Post
+              key={post.id}
+              title={post.title}
+              author={post.author}
+              clicked={() => this.postSelectedHandler(post.id)}
+            />
+            {/* </Link> */}
           </section>
         );
       });
